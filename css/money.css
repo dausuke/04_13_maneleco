@@ -1,0 +1,123 @@
+html{
+    font-size: 32px;
+}
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+h1{
+    font-family: 'Xanh Mono', monospace;
+    font-size: 3rem;
+    font-weight: bold;
+    color: black;
+    text-shadow: 1.5px 1.5px 1.5px rgb(129, 129, 129);
+    margin: 0;
+}
+.buttom3d {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #799dec;
+    text-shadow: 0px 4px 2px rgba(0, 0, 0, 0.32), 0px 1px 0px #6182ca, 0px 2px 0px #4f6aa7, 0px 3px 0px #5470ad;
+}
+.buttom3d:active {
+    top: 4px;
+    text-shadow: none;
+}
+/* 画面切り替えのため（表示・非表示） */
+.content {
+    display: none;
+    width: 100%;
+}
+.content.active {
+    display: block;
+    width: 100%;
+}
+/* メニュー画面 */
+ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+.tab li{
+    font-size: 0.6em;
+    height: 1.5rem;
+    width: 4.7rem;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+    width: 9.3rem;
+	height: 1.9rem;  
+    margin-bottom: 1.7rem;
+}
+.tab a{
+    font-weight: bold;
+}
+/* カレンダー画面 */
+.date{
+    display: flex;
+    justify-content: center;
+}
+#datepicker{
+    width: 20.8rem;
+    margin-right: 0.1rem;
+    font-size: 100%;
+}
+.calendarmemo{
+    width: 20.6rem;
+
+}
+/* 日曜日のカラー設定 */
+td.ui-datepicker-week-end:first-child a.ui-state-default{
+  background-color: #ffecec;   /* 背景色を設定 */
+  color: #f00!important;       /* 文字色を設定 */
+}
+/* 土曜日のカラー設定 */
+td.ui-datepicker-week-end:last-child a.ui-state-default{
+  background-color: #eaeaff;   /* 背景色を設定 */
+  color: #00f!important;       /* 文字色を設定 */
+}
+/* ホバー時の動作 */
+td.ui-datepicker-week-end a.ui-state-hover{
+  opacity: 0.8;
+}
+/* 当日を示す色はそのまま */
+td.ui-datepicker-week-end a.ui-state-highlight{
+  background-color: #fffa90!important;
+}
+
+
+@media screen and (max-width: 550px) {
+/* 480px以下に適用されるCSS（スマホ用） */
+html{
+    font-size: 16px;
+}
+
+/* カレンダー画面 */
+.date{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+}
+#datepicker{
+    width: 100%;
+    font-size: 100%;
+}
+.calendarmemo{
+    width: 100%;
+    height: 19.6rem;
+    background-color: blueviolet;
+
+}
+}

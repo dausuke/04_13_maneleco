@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/money.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/ui-darkness/jquery-ui.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <title>マネレコ</title>
+</head>
+<body>
+    <script src="js/money.js"></script>
+    <main>
+        <!-- メニュー画面 -->
+        <div class="content active" id="manu">
+            <h1>マネレコ</h1>
+            <ul class="tab">
+                <li class="active"><a href="#satsuei" class="buttom3d">撮影</a></li>
+                <li><a href="#calendar" class="buttom3d">カレンダー</a></li>
+                <li><a href="#kanri" class="buttom3d">管理</a></li>
+            </ul>
+        </div>
+        <!-- 撮影画面 -->
+        <div class="content" id = satsuei>
+            <p>撮影する</p>
+            <div class="photo">
+                <video id="camera" width="300" height="200"></video>
+                <canvas id="picture" width="300" height="200"></canvas>
+                <form>
+                    <button type="button" id="shutter">シャッター</button>
+                </form>
+                
+                <audio id="se" preload="auto">
+                    <source src="camera-shutter1.mp3" type="audio/mp3">
+                </audio>
+            </div>
+            <ul class="tab">
+                <li><a href="#manu" class="buttom3d">メニュー</a></li>
+            </ul>
+        </div>
+        <!-- カレンダー画面 -->
+        <div class="content" id = calendar>
+            <div class="date">
+                <div id="datepicker"></div>
+                <div class="calendarmemo"></div>
+            </div>
+            <ul class="tab">
+                <li><a href="#manu" class="buttom3d">メニュー</a></li>
+            </ul>
+        </div>
+        <!-- 管理（グラフ）画面 -->
+        <div class="content" id = kanri>
+            <ul class="tab">
+                <li><a href="#manu" class="buttom3d">メニュー</a></li>
+            </ul>
+
+        </div>
+    </main>
+</body>
+</html>
