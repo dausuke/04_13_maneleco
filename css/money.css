@@ -65,6 +65,9 @@ ul{
 .uploadmemo{
     font-size: 0.5rem;
 }
+/* input.datepicker{
+    font-size: 10%;
+} */
 input{
     width: 15rem;
     height: 1rem;
@@ -99,14 +102,15 @@ textarea{
     display: flex;
     justify-content: center;
 }
-#datepicker{
+div.datepicker{
     width: 20.8rem;
     margin-right: 0.1rem;
     font-size: 100%;
 }
 .calendarmemo{
     width: 20.6rem;
-
+    font-size: 0.5rem;
+    list-style: none;
 }
 /* 日曜日のカラー設定 */
 td.ui-datepicker-week-end:first-child a.ui-state-default{
