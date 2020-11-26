@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" /> -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/ui-darkness/jquery-ui.min.css">
     <link rel="stylesheet" href="css/money.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/ui-darkness/jquery-ui.min.css">
+    <!-- <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+   
+    
     <title>マネレコ</title>
 </head>
 <body>
     <script src="js/money.js"></script>
+    <script src="js/chart.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script>
     <script>
         var firebaseConfig = {
@@ -26,14 +33,25 @@
         firebase.initializeApp(firebaseConfig);
     </script>
     <main>
+        <h1>マネレコ</h1>
         <!-- メニュー画面 -->
         <div class="content active" id="manu">
-            <h1>マネレコ</h1>
             <ul class="tab">
-                <li class="active"><a href="#upload" class="buttom3d">アップロード</a></li>
+                <li class="active"><a href="#manu" class="buttom3d">ＨＯＭＥ</a></li>
+                <li><a href="#upload" class="buttom3d">アップロード</a></li>
                 <li><a href="#calendar" class="buttom3d">カレンダー</a></li>
                 <li><a href="#kanri" class="buttom3d">管理</a></li>
             </ul>
+            <div class="fivecontent">
+                <p>最近の５件</p>
+                    <table class="fivetable" border="5" width="60%" height="110%">
+                        <tr>
+                            <th>購入日</th>
+                            <th>勘定科目</th>
+                            <th>金額</th>
+                        </tr>
+                    </table>
+            </div>
         </div>
         <!-- アップロード画面 -->
         <div class="content" id = upload>
@@ -75,11 +93,15 @@
                     </div>
                     <div class="purchasedate">
                         <p>購入日</p>
-                        <input type="text" id="purchaseday" class="datepicker" value="">
+                        <input type="date" id="purchaseday"  value="">
                     </div>
                     <div class="accounts">
                         <p>勘定科目</p>
                         <input type="text" id=accountitems value="">
+                    </div>
+                    <div class="amount">
+                        <p>金額</p>
+                        <input type="text" id="amountmaney" value="">
                     </div>
                     <div class="memo">
                         <p>メモ</p>
@@ -89,7 +111,10 @@
                 <button id=submit>送信</button>
             </div>
             <ul class="tab">
-                <li><a href="#manu" class="buttom3d">メニュー</a></li>
+                <li class="active"><a href="#manu" class="buttom3d">ＨＯＭＥ</a></li>
+                <li><a href="#upload" class="buttom3d">アップロード</a></li>
+                <li><a href="#calendar" class="buttom3d">カレンダー</a></li>
+                <li><a href="#kanri" class="buttom3d">管理</a></li>
             </ul>
         </div>
         <!-- カレンダー画面 -->
@@ -99,16 +124,32 @@
                 <div class="calendarmemo"></div>
             </div>
             <ul class="tab">
-                <li><a href="#manu" class="buttom3d">メニュー</a></li>
+                <li class="active"><a href="#manu" class="buttom3d">ＨＯＭＥ</a></li>
+                <li><a href="#upload" class="buttom3d">アップロード</a></li>
+                <li><a href="#calendar" class="buttom3d">カレンダー</a></li>
+                <li><a href="#kanri" class="buttom3d">管理</a></li>
             </ul>
         </div>
         <!-- 管理（グラフ）画面 -->
         <div class="content" id = kanri>
             <ul class="tab">
-                <li><a href="#manu" class="buttom3d">メニュー</a></li>
+                <li class="active"><a href="#manu" class="buttom3d">ＨＯＭＥ</a></li>
+                <li><a href="#upload" class="buttom3d">アップロード</a></li>
+                <li><a href="#calendar" class="buttom3d">カレンダー</a></li>
+                <li><a href="#kanri" class="buttom3d">管理</a></li>
             </ul>
-
+            <div class="tablecontent">
+                <table id="datatable" class="table" border="5" width="60%">
+                    <tr>
+                        <th>購入日</th>
+                        <th>勘定科目</th>
+                        <th>金額</th>
+                        <th>メモ</th>
+                    </tr>
+                </table>
+            </div>
         </div>
     </main>
+
 </body>
 </html>
