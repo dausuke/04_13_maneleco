@@ -14,7 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
    
     
-    <title>マネレコ</title>
+    <title>MoneyRecord</title>
 </head>
 <body>
     <script src="js/money.js"></script>
@@ -33,9 +33,11 @@
         firebase.initializeApp(firebaseConfig);
     </script>
     <main>
-        <h1>マネレコ</h1>
         <!-- メニュー画面 -->
         <div class="content active" id="manu">
+            <div class="title">
+            <h1>MoneyRecord</h1>
+            </div>
             <ul class="tab">
                 <li class="active"><a href="#manu" class="buttom3d">ＨＯＭＥ</a></li>
                 <li><a href="#upload" class="buttom3d">アップロード</a></li>
@@ -55,8 +57,8 @@
         </div>
         <!-- アップロード画面 -->
         <div class="content" id = upload>
-            <p>写真をアップロード</p>
             <div class="photo">
+                <p>写真をアップロード</p>
                 <div class="imgform">
                     <!-- 画像プレビュー -->
                     <input type="file" name="upload_file" id="upload_file" class="data file" />
@@ -139,6 +141,7 @@
                 <li><a href="#kanri" class="buttom3d">管理</a></li>
             </ul>
             <div class="tablecontent">
+                <p>レコードリスト</p>
                 <table id="datatable" class="table" border="5" width="60%">
                     <tr>
                         <th>購入日</th>

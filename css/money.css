@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap');
+
 html{
     font-size: 32px;
 }
@@ -14,14 +16,7 @@ main{
     flex-direction: column;
     text-align: center;
 }
-h1{
-    width: 50%;
-    font-size: 3rem;
-    font-weight: bold;
-    color: black;
-    text-shadow: 1.5px 1.5px 1.5px rgb(129, 129, 129);
-    margin: 0;
-}
+
 /* 画面切り替えのため（表示・非表示） */
 .content {
     display: none;
@@ -32,15 +27,28 @@ h1{
     width: 100%;
 }
 /* メニュー画面 */
+.title{
+    width: 100%;
+    position: relative;
+}
+h1{
+    width: 50%;
+    font-size: 3rem;
+    font-family: 'Roboto Slab', serif;
+    font-weight: bold;
+    color: black;
+    text-shadow: 1.5px 1.5px 1.5px rgb(129, 129, 129);
+    margin: 0;
+    position: absolute;
+    left: 35%;
+}
 .fivecontent{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-.fivetable{
-    margin-left: 1rem;
-    
+    margin-top: 6rem;
+    margin-left: 9rem;
 }
 .fivetable th{
     text-align: center;
@@ -49,6 +57,7 @@ h1{
 .fivetable td{
     font-size: 0.5rem;
 }
+
 /* メニューバー */
 ul.tab {
 	list-style-type: none;
@@ -93,6 +102,9 @@ ul.tab {
 }
 
 /* アップロード画面 */
+.photo{
+    margin-left: 7rem;
+}
 .uploadmemo{
     font-size: 0.5rem;
 }
@@ -135,6 +147,7 @@ textarea{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-left: 7rem;
 }
 .datepicker{
     width: 20.8rem;
@@ -146,6 +159,10 @@ textarea{
     width: 20.6rem;
     font-size: 0.5rem;
     list-style: none;
+    border-top: solid #1e366a 3px;
+    border-bottom: solid #1e366a 3px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 /* 日曜日のカラー設定 */
 td.ui-datepicker-week-end:first-child a.ui-state-default{
@@ -171,6 +188,8 @@ td.ui-datepicker-week-end a.ui-state-highlight{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 2rem;
+    margin-left: 7rem;
 }
 .table th{
     font-size: 0.7rem;
@@ -178,13 +197,11 @@ td.ui-datepicker-week-end a.ui-state-highlight{
 .table td{
     font-size: 0.5rem;
 }
-
 @media screen and (max-width: 550px) {
 /* 550px以下に適用されるCSS（スマホ用） */
 html{
     font-size: 16px;
 }
-
 /* カレンダー画面 */
 .date{
     display: flex;
@@ -201,7 +218,8 @@ html{
 .calendarmemo{
     width: 100%;
     height: 19.6rem;
-    background-color: blueviolet;
+
 
 }
+
 }
