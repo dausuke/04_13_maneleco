@@ -22,9 +22,9 @@ $(function () {
             };
             dataArray.push(data);
         });
+
         const tableArray = [];
-        //メニュー画面（最近の５件表示）
-        for (let i = 0; i<dataArray.length; i++) {
+        for (let i = 0; i<dataArray.length; i++) {      //保存しているすべてのデータ表示
             const tableTag = `
             <tr>
                 <td>${dataArray[i].data.day}</td>

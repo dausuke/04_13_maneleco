@@ -14,8 +14,8 @@ $(function () {
     let accountval;         //勘定科目のvalue値取得用
     let purchasedateval;    //購入日のvalue値取得用
     let imgfile;            //画像のscr取得用
-    const dataArray = [];
-    let data;
+    const dataArray = [];   //firebaseのデータ取得用
+    const daycolor = [];    //カレンダーの色変更用
 
     $('#upload_file').on('change', function(){ // ファイルが選択されるたびに作動
         const strFileInfo = $('#upload_file')[0].files[0]; // ファイルオブジェクトを変数に格納
@@ -43,7 +43,6 @@ $(function () {
     //#purchasedayで選択された日付を変数purchasedatevalに格納
     $('#purchaseday').change(function () { 
         purchasedateval = $('#purchaseday').val();
-        console.log(purchasedateval)
         return purchasedateval;
     });
 
@@ -71,14 +70,21 @@ $(function () {
     // データをリアルタイムに取得する処理
     db.orderBy('day', 'desc').onSnapshot(function (querySnapshot) {
         querySnapshot.docs.forEach(function (doc) {
-             data = {
+            const data = {
                 id : doc.id,
                 data : doc.data(),
             };
             dataArray.push(data);
         });
-        const moneyArray = [];
+
+        //カレンダーの色変更用
+        //firebaseから取得した購入日のデータを配列daycolorに格納
+         for (let i = 0; i < dataArray.length; i++) {
+                daycolor.push(new Date(dataArray[i].data.day));
+        };
+
         //メニュー画面（最近の５件表示）
+        const moneyArray = [];
         for (let i = 0; i < 5; i++) {
             const moneyTag = `
             <tr>
@@ -88,13 +94,12 @@ $(function () {
             </tr>
             `;
             moneyArray.push(moneyTag);
-            // console.log(dataArray[i].data);
             };
-        
         $('.fivetable').append(moneyArray);
     });
     
     //カレンダーの処理
+    console.log(daycolor);
     $('.datepicker').datepicker({
         dateFormat: 'yy-mm-dd',     //表示形式：年-月-日
         onSelect: function(dateText, inst) {
@@ -117,6 +122,16 @@ $(function () {
                 $('.calendarmemo').html(tagArray[i]);
                  };
              };
+        },
+        //購入日のデータに応じて色変更
+        beforeShowDay: function (date) {
+            const Highlight = daycolor[date];
+            if (Highlight) {
+                return [true, "daycolor",""];
+            }
+            else {
+                return [true, 'daycolors', ''];
+            }
         }
     });
 });

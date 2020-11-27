@@ -74,7 +74,6 @@ ul.tab {
 }
 
 /* メニューバーのボタン */
-
 .tab li:nth-child(1){
     margin-top: 3rem;
 }
@@ -154,7 +153,14 @@ textarea{
     margin-left: 1rem;
     margin-top: 2rem;
     font-size: 100%;
+    
 }
+.daycolor a{
+    background-color : Green !important;
+    background-image :none !important;
+    color: White !important;
+}
+
 .calendarmemo{
     width: 20.6rem;
     font-size: 0.5rem;
@@ -197,11 +203,61 @@ td.ui-datepicker-week-end a.ui-state-highlight{
 .table td{
     font-size: 0.5rem;
 }
+
+
 @media screen and (max-width: 550px) {
 /* 550px以下に適用されるCSS（スマホ用） */
 html{
     font-size: 16px;
 }
+body{
+    font-family: Roboto, "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+}
+/* メニュー画面 */
+.title{
+    position: static;
+    display: flex;
+    justify-content: center;
+    
+}
+h1{
+    position: static;
+    width: 100%;
+}
+/* メニューバー */
+ul.tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+    width: 100%;
+    height: 1.5rem;
+    background-color: rgba(26, 25, 25, 0.164);
+    position: static;
+}
+.tab li:nth-child(1){
+    margin-top: 0;
+}
+.buttom3d{
+    margin-bottom: 0;
+    margin-right: 1rem;
+
+}
+.fivecontent{
+    margin-left: 0;
+    margin-top: 2rem;
+}
+
+/* アップロード画面 */
+.photo{
+    margin-left: 0;
+}
+#submit{
+    margin-bottom: 1rem;
+}
+
 /* カレンダー画面 */
 .date{
     display: flex;
@@ -209,7 +265,7 @@ html{
     align-items: center;
     flex-direction: column;
     text-align: center;
-
+    margin: 0;
 }
 #datepicker{
     width: 100%;
@@ -218,8 +274,14 @@ html{
 .calendarmemo{
     width: 100%;
     height: 19.6rem;
-
-
 }
 
+/* 管理画面 */
+.tablecontent{
+    margin-top: 2rem;
+    margin-left: 0;
+}
+.table{
+    width: 100%;
+}
 }
