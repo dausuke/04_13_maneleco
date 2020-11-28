@@ -99,7 +99,7 @@ $(function () {
     });
     
     //カレンダーの処理
-    console.log(daycolor);
+    console.log(daycolor);    
     $('.datepicker').datepicker({
         dateFormat: 'yy-mm-dd',     //表示形式：年-月-日
         onSelect: function(dateText, inst) {
@@ -123,15 +123,15 @@ $(function () {
                  };
              };
         },
-        //購入日のデータに応じて色変更
-        beforeShowDay: function (date) {
-            const Highlight = daycolor[date];
-            if (Highlight) {
-                return [true, "daycolor",""];
-            }
-            else {
-                return [true, 'daycolors', ''];
-            }
-        }
+        //購入日のデータに応じて色変更と土日の色変更
+        // beforeShowDay: function (date) {
+    //         // const Highlight = daycolor[date];
+    //         if (daycolor.getYear() == date.getYear() && daycolor.getMonth() == date.getMonth() && daycolor.getDate() == date.getDate()) {
+    //             return [true, "daycolor",""];
+    //         }
+    //         else {
+    //             return [true, 'not', ''];
+    //         }
+        // }
     });
 });

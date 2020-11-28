@@ -171,23 +171,20 @@ textarea{
     margin-bottom: 1rem;
 }
 /* 日曜日のカラー設定 */
-td.ui-datepicker-week-end:first-child a.ui-state-default{
-  background-color: #ffecec;   /* 背景色を設定 */
-  color: #f00!important;       /* 文字色を設定 */
+.ui-datepicker-week-end:first-child span{                   /*曜日*/
+    color: #f00!important;
+}
+.ui-datepicker-week-end:first-child a.ui-state-default{     /*日付*/
+    color: #f00!important;
 }
 /* 土曜日のカラー設定 */
-td.ui-datepicker-week-end:last-child a.ui-state-default{
-  background-color: #eaeaff;   /* 背景色を設定 */
-  color: #00f!important;       /* 文字色を設定 */
+.ui-datepicker-week-end:last-child span{                    /*曜日*/
+    color: #00f!important;
 }
-/* ホバー時の動作 */
-td.ui-datepicker-week-end a.ui-state-hover{
-  opacity: 0.8;
+.ui-datepicker-week-end:last-child a.ui-state-default{      /*日付*/
+    color: #00f!important;
 }
-/* 当日を示す色はそのまま */
-td.ui-datepicker-week-end a.ui-state-highlight{
-  background-color: #fffa90!important;
-}
+
 /* 管理画面 */
 .tablecontent{
     display: flex;
