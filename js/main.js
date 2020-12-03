@@ -78,6 +78,20 @@ $(function () {
             dataArray.push(data);
         });
 
+         //メニュー画面（最近の５件表示）
+            const moneyArray = [];
+            for (let i = 0; i < 5; i++) {
+                const moneyTag = `
+                <tr>
+                    <td>${dataArray[i].data.day}</td>
+                    <td>${dataArray[i].data.text}</td>
+                    <td>${dataArray[i].data.amount}</td>
+                </tr>
+                `;
+                moneyArray.push(moneyTag);
+                };
+            $('.fivetable').append(moneyArray);
+
         //カレンダーの色変更用
         //firebaseから取得した購入日のデータを配列daycolorに格納
          for (let i = 0; i < dataArray.length; i++) {
@@ -86,20 +100,6 @@ $(function () {
              const highlighttag = daycolor[i].getFullYear() + '-' + ('0' + (daycolor[i].getMonth() + 1)).slice(-2) + '-' + ('0' + daycolor[i].getDate()).slice(-2);
              highlight.push(highlighttag)
         };
-
-        //メニュー画面（最近の５件表示）
-        const moneyArray = [];
-        for (let i = 0; i < 5; i++) {
-            const moneyTag = `
-            <tr>
-                <td>${dataArray[i].data.day}</td>
-                <td>${dataArray[i].data.text}</td>
-                <td>${dataArray[i].data.amount}</td>
-            </tr>
-            `;
-            moneyArray.push(moneyTag);
-            };
-        $('.fivetable').append(moneyArray);
     });
 
     //カレンダーの処理
