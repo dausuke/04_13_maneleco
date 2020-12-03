@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    
+    <!-- <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/dt/dt-1.10.22/af-2.3.5/kt-2.5.3/r-2.2.6/rr-1.2.7/sl-1.3.1/datatables.min.css" /> -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/ui-darkness/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript"
+        src="https://cdn.datatables.net/v/dt/dt-1.10.22/af-2.3.5/kt-2.5.3/r-2.2.6/rr-1.2.7/sl-1.3.1/datatables.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <title>MoneyRecord</title>
+</head>
+<body>
+    <script src="js/main.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBghI-nPw8EyVBZr4n48kpKKdVoFqnKGOw",
+            authDomain: "kadai04.firebaseapp.com",
+            databaseURL: "https://kadai04.firebaseio.com",
+            projectId: "kadai04",
+            storageBucket: "kadai04.appspot.com",
+            messagingSenderId: "299218672603",
+            appId: "1:299218672603:web:0a9743d66c2f1d0ab9a5fe"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <main>
+        <!-- メニュー画面 -->
+        <div class="content active" id="manu">
+            <div class="title">
+            <h1>MoneyRecord</h1>
+            </div>
+            <ul class="tab">
+                <li class="active"><a href="#manu" class="buttom3d">ＨＯＭＥ</a></li>
+                <li><a href="#upload" class="buttom3d">アップロード</a></li>
+                <li><a href="#calendar" class="buttom3d">カレンダー</a></li>
+                <li><a href="#kanri" class="buttom3d">管理</a></li>
+            </ul>
+            <div class="fivecontent">
+                <p>最近の５件</p>
+                    <table class="fivetable" border="5" width="60%" height="110%">
+                        <tr>
+                            <th>購入日</th>
+                            <th>勘定科目</th>
+                            <th>金額</th>
+                        </tr>
+                    </table>
+            </div>
+        </div>
+        <!-- アップロード画面 -->
+        <div class="content" id = upload>
+            <div class="photo">
+                <p>写真をアップロード</p>
+                <div class="imgform">
+                    <!-- 画像プレビュー -->
+                    <input type="file" id="upload_file" class="data file" />
+                    <br /><br />
+                    <!-- プレビューエリア -->
+                    <span id="preview_area"></span> 
+                </div>
+                <div class="uploadmemo">
+                    <div class="productmemo">
+                        <p>用途・目的</p>
+                        <select type="text" id="select">
+                            <optgroup label="">
+                            <option value="">選択</option>
+                            <option value="仕入高">商品の仕入代金、仕入にともなう運賃など付随費用</option>
+                            <option value="水道光熱費">電気代や水道代、ガス代などの水道光熱費</option>
+                            <option value="消耗品費">10万円未満の物品、その他コピー用紙等、事務に使う少額の物品を購入するための支出</option>
+                            <option value="接待交際費">得意先、お客様などを接待するための支出</option>
+                            <option value="通信費">電話代や切手代、ＦＡＸ、インターネット利用料などの通信費</option>
+                            <option value="旅費交通費">電車賃やバス代、タクシー代などの交通費（海外の交通費・国際線運賃→対象外）</option>
+                            <option value="修繕費">備品や車両、建物など、会社の資産を修繕するための支出</option>
+                            <option value="荷造包装費">商品を荷造りや包装するための支出</option>
+                            <option value="運 賃">商品を発送するための運送代</option>
+                            <option value="広告宣伝費">ちらし作成費や看板代など広告や宣伝のための支出</option>
+                            <option value="地代家賃">事務所や店舗、駐車場を賃借するための支出</option>
+                            <option value="支払手数料">振込手数料などの手数料を支払ったときに使用する科目</option>
+                            <option value="支払利息割引料">借入金の利息、手形の割引料</option>
+                            <option value="保険料">生命保険や損害保険の保険料</option>
+                            <option value="外注費">売上高の原価となる外注費、業務委託料</option>
+                            <option value="雑 費">その他少額な支出</option>
+                            <option value="法人税、住民税及び事業税">法人税、法人住民税、事業税、預金利息の源泉税</option>
+                            <option value="租税公課">印紙税や自動車税、固定資産税など税金の支払い</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="purchasedate">
+                        <p>購入日</p>
+                        <input type="date" id="purchaseday"  value="">
+                    </div>
+                    <div class="accounts">
+                        <p>勘定科目</p>
+                        <input type="text" id=accountitems value="">
+                    </div>
+                    <div class="amount">
+                        <p>金額</p>
+                        <input type="text" id="amountmaney" value="">
+                    </div>
+                    <div class="memo">
+                        <p>メモ</p>
+                        <textarea  id="textmemo" value=""></textarea>
+                    </div>
+                </div>
+                <button id=submit><span>SUBMIT!</span></button>
+            </div>
+            <ul class="tab">
+                <li class="active"><a href="#manu" class="buttom3d">ＨＯＭＥ</a></li>
+                <li><a href="#upload" class="buttom3d">アップロード</a></li>
+                <li><a href="#calendar" class="buttom3d">カレンダー</a></li>
+                <li><a href="#kanri" class="buttom3d">管理</a></li>
+            </ul>
+        </div>
+        <!-- カレンダー画面 -->
+        <div class="content" id = calendar>
+            <div class="date">
+                <div class="datepicker"></div>
+                <div class="calendarmemo"></div>
+            </div>
+            <ul class="tab">
+                <li class="active"><a href="#manu" class="buttom3d">ＨＯＭＥ</a></li>
+                <li><a href="#upload" class="buttom3d">アップロード</a></li>
+                <li><a href="#calendar" class="buttom3d">カレンダー</a></li>
+                <li><a href="#kanri" class="buttom3d">管理</a></li>
+            </ul>
+        </div>
+        <!-- 管理（リスト）画面 -->
+        <div class="content" id = kanri>
+            <ul class="tab">
+                <li class="active"><a href="#manu" class="buttom3d">ＨＯＭＥ</a></li>
+                <li><a href="#upload" class="buttom3d">アップロード</a></li>
+                <li><a href="#calendar" class="buttom3d">カレンダー</a></li>
+                <li><a href="#kanri" class="buttom3d">管理</a></li>
+            </ul>
+            <div class="tablecontent">
+                <p>レコードリスト</p>
+                <table id="datatable" class="table" border="5" width="80%">
+                    <thead>
+                        <tr>
+                            <th>購入日</th>
+                            <th>勘定科目</th>
+                            <th>金額</th>
+                            <th>メモ</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -6,7 +6,7 @@ html{
 body{
     margin: 0;
     padding: 0;
-    
+    background-color: rgba(255, 205, 205, 0.267);
 }
 main{
     width: 100%;
@@ -116,7 +116,7 @@ input{
     height: 1rem;
     font-size: 0.75rem;
     border: solid;
-    background-color: lightgray;
+    background-color: rgb(252, 242, 224);
     z-index: 5;
 }
 select{
@@ -124,7 +124,7 @@ select{
     height: 1.3rem;
     font-size: 0.75rem;
     border: solid;
-    background-color: lightgray;
+    background-color: rgb(252, 242, 224);
 }
 option{
     font-size: 0.5rem;
@@ -134,12 +134,28 @@ textarea{
     height: 7.5rem;
     font-size: 0.75rem;
     border: solid;
-    background-color: lightgray;
+    background-color: rgb(252, 242, 224);
 }
 #submit{
-    margin-top: 3rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    height: 1.5rem;
+    width: 5rem;
+    font-size: 0.7rem;
+    color: #FFF;
+    background: #f86a6a;
+    font-weight: bold;
+    padding: 0.5em 0.5em;
+    transition: .4s;
+    border: none;
 }
-
+#submit > span{
+    border-bottom: solid 2px #FFF;
+    border-top: solid 2px #FFF;
+}
+#submit:hover span {
+    padding: 0.1em 0;
+}
 /* カレンダー画面 */
 .date{
     display: flex;
@@ -194,14 +210,44 @@ textarea{
     margin-top: 2rem;
     margin-left: 7rem;
 }
+/* データテーブル */
+#datatable_wrapper{
+    width: 100%;
+}
 .table th{
     font-size: 0.7rem;
 }
 .table td{
     font-size: 0.5rem;
 }
-
-
+.dataTables_length{
+    margin-left: 3.5rem;
+}
+.dataTables_length label{
+    width: 9rem;
+    font-size: 0.7rem;
+}
+.dataTables_length label select{
+    width: 6rem;
+}
+#datatable_filter{
+margin-right: 3.5rem;
+}
+#datatable_filter label{
+    width: 9rem;
+    font-size: 0.7rem;
+}
+#datatable_filter label input{
+    width: 6rem;
+}
+.dataTables_info{
+    position: absolute;
+    left: 10%;
+    font-size: 0.7rem;
+}
+.dataTables_paginate a{
+    font-size: 0.7rem;
+}
 @media screen and (max-width: 550px) {
 /* 550px以下に適用されるCSS（スマホ用） */
 html{

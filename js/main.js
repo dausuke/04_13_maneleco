@@ -16,6 +16,7 @@ $(function () {
     let imgfile;            //画像のscr取得用
     const dataArray = [];   //firebaseのデータ取得用
     const daycolor = [];    //カレンダーの色変更用
+    let highlight = [];     //カレンダーの色変更用
 
     $('#upload_file').on('change', function(){ // ファイルが選択されるたびに作動
         const strFileInfo = $('#upload_file')[0].files[0]; // ファイルオブジェクトを変数に格納
@@ -80,7 +81,10 @@ $(function () {
         //カレンダーの色変更用
         //firebaseから取得した購入日のデータを配列daycolorに格納
          for (let i = 0; i < dataArray.length; i++) {
-                daycolor.push(new Date(dataArray[i].data.day));
+             daycolor.push(new Date(dataArray[i].data.day));
+             //日付をyy-mm-dd形式表示
+             const highlighttag = daycolor[i].getFullYear() + '-' + ('0' + (daycolor[i].getMonth() + 1)).slice(-2) + '-' + ('0' + daycolor[i].getDate()).slice(-2);
+             highlight.push(highlighttag)
         };
 
         //メニュー画面（最近の５件表示）
@@ -97,11 +101,23 @@ $(function () {
             };
         $('.fivetable').append(moneyArray);
     });
-    
+
     //カレンダーの処理
     console.log(daycolor);    
+    console.log(highlight)
     $('.datepicker').datepicker({
         dateFormat: 'yy-mm-dd',     //表示形式：年-月-日
+        // 購入日のデータに応じて色変更と土日の色変更
+        beforeShowDay: function (date) {
+            //日付をyy-mm-dd形式表示
+            var ymd = date.getFullYear() + '-'+( '0' + (date.getMonth() + 1)).slice(-2) + '-'+( '0' +  date.getDate()).slice(-2);
+            console.log(ymd)
+            if (highlight.indexOf(ymd) != -1) {
+                return [true, "daycolor",""];
+            } else {
+                return [true, 'not', ''];
+            }
+        },
         onSelect: function(dateText, inst) {
             const date1 = dateText; 
             for (let i = 0; i < dataArray.length; i++) {
@@ -122,16 +138,6 @@ $(function () {
                 $('.calendarmemo').html(tagArray[i]);
                  };
              };
-        },
-        //購入日のデータに応じて色変更と土日の色変更
-        // beforeShowDay: function (date) {
-    //         // const Highlight = daycolor[date];
-    //         if (daycolor.getYear() == date.getYear() && daycolor.getMonth() == date.getMonth() && daycolor.getDate() == date.getDate()) {
-    //             return [true, "daycolor",""];
-    //         }
-    //         else {
-    //             return [true, 'not', ''];
-    //         }
-        // }
+        }
     });
 });
