@@ -68,29 +68,37 @@ $(function () {
         $('#textmemo').val('');
      });
     
+    //メニュー画面（最近の５件表示）
+    db.orderBy('day', 'desc').get().then(function (querySnapshot) {
+        const dataArrayFiveContent = []
+        querySnapshot.forEach(function(doc) {
+            dataArrayFiveContent.push(doc.data())
+        });
+        console.log(dataArrayFiveContent)
+        const moneyArray = [];
+            for (let i = 0; i < 5; i++) {
+                const moneyTag = `
+                <tr>
+                    <td>${dataArrayFiveContent[i].day}</td>
+                    <td>${dataArrayFiveContent[i].text}</td>
+                    <td>${dataArrayFiveContent[i].amount}</td>
+                </tr>
+                `;
+                moneyArray.push(moneyTag);
+                };
+        $('.fivetable').append(moneyArray);
+        console.log(moneyArray)
+    });
+    
     // データをリアルタイムに取得する処理
     db.orderBy('day', 'desc').onSnapshot(function (querySnapshot) {
         querySnapshot.docs.forEach(function (doc) {
             const data = {
                 id : doc.id,
-                data : doc.data(),
+                data : doc.data()
             };
             dataArray.push(data);
         });
-
-         //メニュー画面（最近の５件表示）
-            const moneyArray = [];
-            for (let i = 0; i < 5; i++) {
-                const moneyTag = `
-                <tr>
-                    <td>${dataArray[i].data.day}</td>
-                    <td>${dataArray[i].data.text}</td>
-                    <td>${dataArray[i].data.amount}</td>
-                </tr>
-                `;
-                moneyArray.push(moneyTag);
-                };
-            $('.fivetable').append(moneyArray);
 
         //カレンダーの色変更用
         //firebaseから取得した購入日のデータを配列daycolorに格納
@@ -100,44 +108,65 @@ $(function () {
              const highlighttag = daycolor[i].getFullYear() + '-' + ('0' + (daycolor[i].getMonth() + 1)).slice(-2) + '-' + ('0' + daycolor[i].getDate()).slice(-2);
              highlight.push(highlighttag)
         };
-    });
 
-    //カレンダーの処理
-    console.log(daycolor);    
-    console.log(highlight)
-    $('.datepicker').datepicker({
-        dateFormat: 'yy-mm-dd',     //表示形式：年-月-日
-        // 購入日のデータに応じて色変更と土日の色変更
-        beforeShowDay: function (date) {
-            //日付をyy-mm-dd形式表示
-            var ymd = date.getFullYear() + '-'+( '0' + (date.getMonth() + 1)).slice(-2) + '-'+( '0' +  date.getDate()).slice(-2);
-            console.log(ymd)
-            if (highlight.indexOf(ymd) != -1) {
-                return [true, "daycolor",""];
-            } else {
-                return [true, 'not', ''];
+        //カレンダーの処理
+        $('.datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',     //表示形式：年-月-日
+            // 購入日のデータに応じて色変更と土日の色変更
+            beforeShowDay: function (date) {
+                //日付をyy-mm-dd形式表示
+                var ymd = date.getFullYear() + '-'+( '0' + (date.getMonth() + 1)).slice(-2) + '-'+( '0' +  date.getDate()).slice(-2);
+                if (highlight.indexOf(ymd) != -1) {
+                    return [true, "daycolor",""];
+                } else {
+                    return [true, 'not', ''];
+                }
+            },
+            onSelect: function(dateText, inst) {
+                const date1 = dateText; 
+                for (let i = 0; i < dataArray.length; i++) {
+                    if (date1 == dataArray[i].data.day) {   //選択された日付と保存されたデータの日付を判定
+                        const tagArray = [];
+                        dataArray.forEach(function (data) {     //同じであれば表示
+                            const tag = `
+                                <div class = datacontent>
+                                <span id = "${data.id}" class = "deleteId">${data.id}</span>
+                                <p>${data.data.day}</p>
+                                <p>${data.data.text}</p>
+                                <p>${data.data.amount}</p>
+                                <img id="decodeimg" width="400" src= ${data.data.img} />
+                                <p>${data.data.memo}</p>
+                                </div>
+                            `;
+                            tagArray.push(tag);
+                        });
+                    $('.calendarmemo').html(tagArray[i]);
+                    };
+                };
             }
-        },
-        onSelect: function(dateText, inst) {
-            const date1 = dateText; 
-            for (let i = 0; i < dataArray.length; i++) {
-                if (date1 == dataArray[i].data.day) {   //選択された日付と保存されたデータの日付を判定
-                    const tagArray = [];
-                    dataArray.forEach(function (data) {     //同じであれば表示
-                        const tag = `
-                            <li id = "${data.id}">
-                            <p>${data.data.day}</p>
-                            <p>${data.data.text}</p>
-                            <p>${data.data.amount}</p>
-                            <img id="decodeimg" width="400" src= ${data.data.img} />
-                            <p>${data.data.memo}</p>
-                            </li>
-                        `;
-                        tagArray.push(tag);
-                    });
-                $('.calendarmemo').html(tagArray[i]);
-                 };
-             };
-        }
+        });
+
+        //消去ボタンクリック時の処理
+        $('#clear').on('click', function () {
+            //#clearがクリックされたとき、消去確認用のモーダルウィンドウ要素追加
+            $(this).siblings('.calendarmemo').append('<div class= clearmodal ></div >')
+            $(this).siblings('.calendarmemo').find('.clearmodal').append('<div class = modal-content></div>')
+            $(this).siblings('.calendarmemo').find('.modal-content').append('<p>delete</p>');
+            $('.clearmodal p').addClass("modal-close")
+            $('clearmodal').fadeIn();
+            // モーダルウィンドウ表示・非表示(消去の確認画面)
+            $('.modal-close').text('このデータを消去しますか？')
+            return false;
+        });
+        //.modal-closeクリック時、該当のfirebaseのデータを消去
+        $(document).on('click', '.modal-close', function () {
+            //.modal-closeの親要素にあたる.clearmodalを取得し、
+            //その子要素.datacontent内のspanタグに付与しているidを取得して変数deletenameに格納
+            const deletename = $(this).parents('.clearmodal').siblings('.datacontent').find('span').attr('id');
+            console.log(deletename);
+            db.doc(deletename).delete();    //cloudfirestoreから削除
+            $('.clearmodal').fadeOut();
+            $('.calendarmemo').empty();     //表示しているデータ削除
+        });
     });
 });

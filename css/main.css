@@ -186,6 +186,54 @@ textarea{
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+#clear{
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    height: 1.5rem;
+    width: 4rem;
+    font-size: 0.7rem;
+    color: #FFF;
+    background: #f86a6a;
+    font-weight: bold;
+    padding: 0.5em 0.5em;
+    transition: .4s;
+    border: none;
+}
+#clear > span{
+    border-bottom: solid 2px #FFF;
+    border-top: solid 2px #FFF;
+}
+#clear:hover span {
+    padding: 0.1em 0;
+}
+.deleteId{
+    display: none;
+}
+/* モーダルウィンドウ */
+.clearmodal{
+    height: 7rem;
+    position: fixed;
+    top: 0;
+    width: 15rem;
+    z-index: 10;
+}
+/* モーダルウィンドウ(消去確認) */
+.modal-content{
+    background: rgba(0,0,0,0.8);
+    padding: 40px;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    width: 11rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-close{
+    color: white;
+    font-size: 0.7rem;
+}
 /* 日曜日のカラー設定 */
 .ui-datepicker-week-end:first-child span{                   /*曜日*/
     color: #f00!important;

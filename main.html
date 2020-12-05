@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     
-    <!-- <link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/v/dt/dt-1.10.22/af-2.3.5/kt-2.5.3/r-2.2.6/rr-1.2.7/sl-1.3.1/datatables.min.css" /> -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/dt/dt-1.10.22/af-2.3.5/kt-2.5.3/r-2.2.6/rr-1.2.7/sl-1.3.1/datatables.min.css" />
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/ui-darkness/jquery-ui.min.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- <script type="text/javascript"
-        src="https://cdn.datatables.net/v/dt/dt-1.10.22/af-2.3.5/kt-2.5.3/r-2.2.6/rr-1.2.7/sl-1.3.1/datatables.min.js"></script> -->
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/dt/dt-1.10.22/af-2.3.5/kt-2.5.3/r-2.2.6/rr-1.2.7/sl-1.3.1/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
     <title>MoneyRecord</title>
 </head>
 <body>
     <script src="js/main.js"></script>
-    <script src="js/chart.js"></script>
+    <script src="js/table.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase.js"></script>
     <script>
         var firebaseConfig = {
@@ -124,6 +124,7 @@
             <div class="date">
                 <div class="datepicker"></div>
                 <div class="calendarmemo"></div>
+                <button id=clear><span>delete</span></button>
             </div>
             <ul class="tab">
                 <li class="active"><a href="#manu" class="buttom3d">ＨＯＭＥ</a></li>
